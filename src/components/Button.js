@@ -1,19 +1,24 @@
 import React, { useState } from "react";
+import Product from "./Product";
 import ProductForm from "./ProductForm";
 
 const Button = ({ text, addProduct }) => {
-  const [showForm, setShowForm] = useState(false);
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
-  const handleClick = () => {
-    setShowForm(true);
+  const openForm = () => {
+    setIsFormOpen(true);
+  };
+
+  const closeForm = () => {
+    setIsFormOpen(false);
   };
 
   return (
     <>
-      <button className="btn btn-primary" onClick={handleClick}>
+      <button className="btn btn-primary" onClick={openForm}>
         {text}
       </button>
-      {showForm && <ProductForm />}
+      <ProductForm isFormOpen={isFormOpen} closeForm={closeForm} />
     </>
   );
 };
