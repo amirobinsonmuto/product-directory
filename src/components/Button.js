@@ -18,7 +18,11 @@ const Button = ({ text, addProduct }) => {
       <button className="btn btn-primary" onClick={openForm}>
         {text}
       </button>
-      <ProductForm isFormOpen={isFormOpen} closeForm={closeForm} />
+      <ProductForm
+        isFormOpen={isFormOpen}
+        closeForm={closeForm}
+        addProduct={addProduct}
+      />
     </>
   );
 };
