@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "./Button";
 
 const Product = ({ product }) => {
   return (
@@ -14,6 +15,9 @@ const Product = ({ product }) => {
       <td>{product.scrumMasterName}</td>
       <td>{product.startDate}</td>
       <td>{product.methodology}</td>
+      <td>
+        <Button text="edit" />
+      </td>
     </tr>
   );
 };

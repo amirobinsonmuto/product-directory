@@ -34,11 +34,15 @@ function App() {
     },
   ]);
 
+  const addProduct = (newProduct) => {
+    setProducts([...products, newProduct]);
+  };
+
   return (
     <div className="App container">
       <h1>Product Tracker</h1>
       <Heading text="Current Products" />
-      <Button text="Add a new product" />
+      <Button text="Add a new product" addProduct={addProduct} />
       <Products products={products} />
     </div>
   );
