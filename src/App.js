@@ -1,6 +1,7 @@
 import "./App.css";
 import { useState } from "react";
 import Heading from "./components/Heading";
+import Button from "./components/Button";
 
 function App() {
   // [products, setProducts] = useState([
@@ -36,7 +37,8 @@ function App() {
   return (
     <div className="App">
       <h1>Product Tracker</h1>
-      <Heading text="Current Products"/>
+      <Heading text="Current Products" />
+      <Button text="Add a new product" />
     </div>
   );
 }
