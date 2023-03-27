@@ -8,8 +8,8 @@ const Product = ({ product }) => {
       <td>{product.productName}</td>
       <td>{product.productOwnerName}</td>
       <td>
-        {product.developers.map((developer) => (
-          <p>{developer}</p>
+        {product.developers.map((developer, index) => (
+          <p key={index}>{developer}</p>
         ))}
       </td>
       <td>{product.scrumMasterName}</td>
