@@ -34,16 +34,37 @@ function App() {
     },
   ]);
 
-  const addProduct = (newProduct) => {
-    setProducts([...products, newProduct]);
+  const getProductToEdit = (id) => {
+    // get the index number of the product to edit
+    const productToEdit = products.find((product) => product.productId === id);
+    const index = products.indexOf(productToEdit);
+    return products[index];
+  };
+
+  const onSubmit = (newProductObj, submitType, id) => {
+    if (submitType === "add") {
+      setProducts([...products, newProductObj]);
+    } else {
+      const productToEdit = products.find(
+        (product) => product.productId === id
+      );
+      const index = products.indexOf(productToEdit);
+      const copiedProducts = [...products];
+      copiedProducts[index] = newProductObj;
+      setProducts(copiedProducts);
+    }
   };
 
   return (
     <div className="App container">
       <h1>Product Tracker</h1>
       <Heading text="Current Products" />
-      <Button text="Add a new product" addProduct={addProduct} />
-      <Products products={products} />
+      <Button text="Add a new product" onSubmit={onSubmit} submitType="add" />
+      <Products
+        products={products}
+        getProductToEdit={getProductToEdit}
+        onSubmit={onSubmit}
+      />
     </div>
   );
 }

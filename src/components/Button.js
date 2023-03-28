@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import Product from "./Product";
 import ProductForm from "./ProductForm";
 
-const Button = ({ text, addProduct }) => {
+const Button = ({
+  text,
+  onSubmit,
+  getProductToEdit,
+  productId,
+  submitType,
+}) => {
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   const openForm = () => {
@@ -15,13 +20,21 @@ const Button = ({ text, addProduct }) => {
 
   return (
     <>
-      <button className="btn btn-primary" onClick={openForm}>
+      <button
+        className="btn btn-primary"
+        onClick={() => {
+          openForm();
+        }}
+      >
         {text}
       </button>
       <ProductForm
         isFormOpen={isFormOpen}
         closeForm={closeForm}
-        addProduct={addProduct}
+        onSubmit={onSubmit}
+        getProductToEdit={getProductToEdit}
+        productId={productId}
+        submitType={submitType}
       />
     </>
   );
