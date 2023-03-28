@@ -1,7 +1,7 @@
 import React from "react";
 import Product from "./Product";
 
-const Products = ({ products, getProductToEdit, onSubmit }) => {
+const Products = ({ products, onSubmit }) => {
   return (
     <table className="table">
       <thead>
@@ -17,13 +17,8 @@ const Products = ({ products, getProductToEdit, onSubmit }) => {
         </tr>
       </thead>
       <tbody>
-        {products.map((product) => (
-          <Product
-            key={product.productId}
-            product={product}
-            getProductToEdit={getProductToEdit}
-            onSubmit={onSubmit}
-          />
+        {products.map((product, index) => (
+          <Product key={index} product={product} onSubmit={onSubmit} />
         ))}
       </tbody>
     </table>

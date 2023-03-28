@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "./Button";
 
-const Product = ({ product, getProductToEdit, onSubmit }) => {
+const Product = ({ product, onSubmit }) => {
   return (
     <tr key={product.productId}>
       <td>{product.productId}</td>
@@ -16,13 +16,7 @@ const Product = ({ product, getProductToEdit, onSubmit }) => {
       <td>{product.startDate}</td>
       <td>{product.methodology}</td>
       <td>
-        <Button
-          text="edit"
-          getProductToEdit={getProductToEdit}
-          productId={product.productId}
-          submitType="edit"
-          onSubmit={onSubmit}
-        />
+        <Button productToEdit={product} formType="update" onSubmit={onSubmit} />
       </td>
     </tr>
   );

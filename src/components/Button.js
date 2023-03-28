@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import ProductForm from "./ProductForm";
 
-const Button = ({
-  text,
-  onSubmit,
-  getProductToEdit,
-  productId,
-  submitType,
-}) => {
+const Button = ({ onSubmit, productToEdit, formType }) => {
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   const openForm = () => {
@@ -26,15 +20,14 @@ const Button = ({
           openForm();
         }}
       >
-        {text}
+        {formType === "create" ? "Add New Product" : "Edit"}
       </button>
       <ProductForm
         isFormOpen={isFormOpen}
         closeForm={closeForm}
         onSubmit={onSubmit}
-        getProductToEdit={getProductToEdit}
-        productId={productId}
-        submitType={submitType}
+        productToEdit={productToEdit}
+        formType={formType}
       />
     </>
   );

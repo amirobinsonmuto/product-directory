@@ -11,8 +11,8 @@ function App() {
       productOwnerName: "productOwner1",
       developers: ["NAME_1", "NAME_2", "NAME_3", "NAME_4", "NAME_5"],
       scrumMasterName: "scrumMaster1",
-      startDate: "YYYY/MM/DD",
-      methodology: "methodology1",
+      startDate: "2001/10/02",
+      methodology: "Agile",
     },
     {
       productId: 2,
@@ -20,8 +20,8 @@ function App() {
       productOwnerName: "productOwner2",
       developers: ["NAME_1", "NAME_2", "NAME_3", "NAME_4", "NAME_5"],
       scrumMasterName: "scrumMaster2",
-      startDate: "YYYY/MM/DD",
-      methodology: "methodology2",
+      startDate: "2001/10/02",
+      methodology: "Waterfall",
     },
     {
       productId: 3,
@@ -29,29 +29,23 @@ function App() {
       productOwnerName: "productOwner3",
       developers: ["NAME_1", "NAME_2", "NAME_3", "NAME_4", "NAME_5"],
       scrumMasterName: "scrumMaster3",
-      startDate: "YYYY/MM/DD",
-      methodology: "methodology3",
+      startDate: "2001/10/02",
+      methodology: "Agile",
     },
   ]);
 
-  const getProductToEdit = (id) => {
-    // get the index number of the product to edit
-    const productToEdit = products.find((product) => product.productId === id);
-    const index = products.indexOf(productToEdit);
-    return products[index];
-  };
-
-  const onSubmit = (newProductObj, submitType, id) => {
-    if (submitType === "add") {
-      setProducts([...products, newProductObj]);
+  const onSubmit = (newProduct, formType) => {
+    if (formType === "create") {
+      setProducts([...products, newProduct]);
     } else {
       const productToEdit = products.find(
-        (product) => product.productId === id
+        (product) => product.productId === newProduct.productId
       );
       const index = products.indexOf(productToEdit);
-      const copiedProducts = [...products];
-      copiedProducts[index] = newProductObj;
-      setProducts(copiedProducts);
+      console.log(index);
+      const newProducts = [...products];
+      newProducts[index] = newProduct;
+      setProducts(newProducts);
     }
   };
 
@@ -59,12 +53,8 @@ function App() {
     <div className="App container">
       <h1>Product Tracker</h1>
       <Heading text="Current Products" />
-      <Button text="Add a new product" onSubmit={onSubmit} submitType="add" />
-      <Products
-        products={products}
-        getProductToEdit={getProductToEdit}
-        onSubmit={onSubmit}
-      />
+      <Button onSubmit={onSubmit} formType="create" />
+      <Products products={products} onSubmit={onSubmit} />
     </div>
   );
 }
