@@ -41,13 +41,13 @@ const ProductForm = ({
   };
 
   const handleOnChange = (e) => {
-    let newVal = e.target.value;
+    let newValue = e.target.value;
     if (e.target.name === "startDate")
-      newVal = e.target.value.replace(/-/g, "/");
-    if (e.target.name === "methodology") newVal = e.target.id;
+      newValue = e.target.value.replace(/-/g, "/");
+    if (e.target.name === "methodology") newValue = e.target.id;
     setNewProduct((prevState) => ({
       ...prevState,
-      [e.target.name]: newVal,
+      [e.target.name]: newValue,
     }));
   };
 
@@ -60,7 +60,6 @@ const ProductForm = ({
         developers: newDevelopers,
       };
     });
-    console.log(newProduct);
   };
 
   const handleAddDeveloper = () => {
