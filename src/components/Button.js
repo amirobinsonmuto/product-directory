@@ -15,7 +15,7 @@ const Button = ({ onSubmit, productToEdit, formType }) => {
   return (
     <>
       <button
-        className="btn btn-primary"
+        className="btn btn-primary mt-3 mb-3"
         onClick={() => {
           openForm();
         }}

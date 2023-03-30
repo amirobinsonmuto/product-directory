@@ -1,6 +1,7 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
+import { Form, Button } from "react-bootstrap";
 
 const ProductForm = ({
   isFormOpen,
@@ -78,74 +79,85 @@ const ProductForm = ({
 
   return (
     <Modal show={isFormOpen}>
-      <Modal.Header>Modal header</Modal.Header>
-      <Modal.Body>
+      <Modal.Header>
         <h2>{formType === "create" ? "Add New Product" : "Edit Product"}</h2>
-        <form onSubmit={handleOnSubmit}>
-          <label>
-            Product Name:
-            <br />
-            <input
+      </Modal.Header>
+      <Modal.Body>
+        <Form onSubmit={handleOnSubmit}>
+          <Form.Group>
+            <Form.Label>Product Name:</Form.Label>
+            <Form.Control
+              className="w-75 mb-1"
               name="productName"
               value={newProduct.productName}
               onChange={handleOnChange}
               required
             />
-          </label>
+          </Form.Group>
 
-          <label>
-            Product Owner Name:
-            <br />
-            <input
+          <Form.Group>
+            <Form.Label>Product Owner Name:</Form.Label>
+            <Form.Control
+              className="w-75 mb-1"
               name="productOwnerName"
               value={newProduct.productOwnerName}
               onChange={handleOnChange}
               required
             />
-          </label>
+          </Form.Group>
 
-          <div>
-            Developers
+          <Form.Group>
+            <Form.Label>Developers</Form.Label>
             {newProduct.developers.map((developer, index) => (
               <div key={index}>
-                <input
+                <Form.Control
+                  className="w-75 d-inline-block mb-1"
                   name="developers"
                   value={developer}
                   onChange={(e) => handleDeveloperChange(index, e.target.value)}
                   required
                 />
                 {newProduct.developers.length > 1 && (
-                  <button
+                  <Button
+                    variant="secondary"
+                    className="ms-2"
+                    size="sm"
                     type="button"
                     onClick={() => handleRemoveDeveloper(index)}
                   >
-                    <small>Remove</small>
-                  </button>
+                    Remove
+                  </Button>
                 )}
               </div>
             ))}
             {newProduct.developers.length < 10 && (
-              <button type="button" onClick={handleAddDeveloper}>
+              <Button
+                className="mt-2 mb-2"
+                variant="success"
+                size="sm"
+                type="btn btn-small button"
+                onClick={handleAddDeveloper}
+              >
                 Add Developer
-              </button>
+              </Button>
             )}
-          </div>
+          </Form.Group>
 
-          <label>
-            Scrum Master Name:
-            <br />
-            <input
+          <Form.Group>
+            <Form.Label>Scrum Master Name:</Form.Label>
+            <Form.Control
+              className="w-75 mb-1"
               name="scrumMasterName"
               value={newProduct.scrumMasterName}
               onChange={handleOnChange}
               required
             />
-          </label>
+          </Form.Group>
 
-          <label>
-            Start Date:
-            <br />
-            <input
+          <Form.Group>
+            <Form.Label>Start Date: </Form.Label>
+            <Form.Control
+              className="w-75 mb-1"
               name="startDate"
               value={newProduct.startDate.replace(/\//g, "-")}
               onChange={handleOnChange}
@@ -153,200 +165,55 @@ const ProductForm = ({
               required
               disabled={formType === "Edit"}
             />
-          </label>
+          </Form.Group>
 
-          <label>
-            Methodology:
-            <br />
-            <div>
-              <input
-                name="methodology"
-                id="Agile"
-                value={newProduct.methodology}
-                onChange={handleOnChange}
-                type="radio"
-                required
-                checked={newProduct.methodology === "Agile"}
-              />
-              <label htmlFor="agile">Agile</label>
-              <input
-                name="methodology"
-                id="Waterfall"
-                value={newProduct.methodology}
-                onChange={handleOnChange}
-                type="radio"
-                required
-                checked={newProduct.methodology === "Waterfall"}
-              />
-              <label htmlFor="waterfall">Waterfall</label>
-            </div>
-          </label>
+          <Form.Group>
+            <Form.Label>Methodology: </Form.Label>
+            <Form.Check
+              name="methodology"
+              id="Agile"
+              value={newProduct.methodology}
+              onChange={handleOnChange}
+              type="radio"
+              label="Agile"
+              required
+              checked={newProduct.methodology === "Agile"}
+            />
+            <Form.Check
+              className="mb-4"
+              name="methodology"
+              id="Waterfall"
+              value={newProduct.methodology}
+              onChange={handleOnChange}
+              type="radio"
+              label="Waterfall"
+              required
+              checked={newProduct.methodology === "Waterfall"}
+            />
+          </Form.Group>
 
-          <div>
+          <>
             {formType === "create" && (
-              <button id="submit-btn" type="submit">
+              <Button id="submit-btn" type="submit">
                 Add Product
-              </button>
+              </Button>
             )}
 
             {formType === "update" && (
-              <button id="submit-btn" type="submit">
+              <Button id="submit-btn" type="submit">
                 Save Change
-              </button>
+              </Button>
             )}
-          </div>
-        </form>
+          </>
+        </Form>
       </Modal.Body>
       <Modal.Footer>
-        <button onClick={closeForm}>Cancel</button>
+        <Button variant="secondary" onClick={closeForm}>
+          Cancel
+        </Button>
       </Modal.Footer>
     </Modal>
   );
 };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     // check if al fields have value
-//     if (
-//       !productIdValue ||
-//       !productNameValue ||
-//       !productOwnerNameValue ||
-//       developerValue.some((d) => !d) ||
-//       !scrumMasterNameValue ||
-//       !startDateValue ||
-//       !methodologyValue
-//     ) {
-//       alert("Please fill out all fields.");
-//       return;
-//     } else {
-//       onSubmit(
-//         {
-//           productId: productIdValue,
-//           productName: productNameValue,
-//           productOwnerName: productOwnerNameValue,
-//           developers: developerValue,
-//           scrumMasterName: scrumMasterNameValue,
-//           startDate: startDateValue,
-//           methodology: methodologyValue,
-//         },
-//         submitType,
-//         productId
-//       );
-//       closeForm();
-//     }
-//   };
-
-//   // const handleAddDeveloper = () => {
-//   //   setDeveloperValue(prev => ({
-//   //     ...prev,
-//   //     developerValue
-
-//   //     () => setDeveloperValue([...developerValue, ""])
-//   //   }))
-//   // }
-
-//   return (
-//     <Modal show={isFormOpen}>
-//       <Modal.Header>Modal header</Modal.Header>
-//       <Modal.Body>
-//         <form>
-//           <label>
-//             Product ID:
-//             <input
-//               type="text"
-//               name="productId"
-//               value={productIdValue}
-//               onChange={(e) => setProductIdValue(e.target.value)}
-//             />
-//           </label>
-//           <br />
-
-//           <label>
-//             Product Name:
-//             <input
-//               type="text"
-//               name="productName"
-//               value={productNameValue}
-//               onChange={(e) => setProductNameValue(e.target.value)}
-//             />
-//           </label>
-//           <br />
-
-//           <label>
-//             Product Owner Name:
-//             <input
-//               type="text"
-//               name="productOwnerName"
-//               value={productOwnerNameValue}
-//               onChange={(e) => setProductOwnerNameValue(e.target.value)}
-//             />
-//           </label>
-//           <br />
-
-//           <label>
-//             Developer:
-//             {developerValue.map((developer, index) => (
-//               <input
-//                 key={index}
-//                 type="text"
-//                 name="developer"
-//                 value={developer}
-//                 onChange={(e) => {
-//                   const copiedDeveloperValue = [...developerValue];
-//                   copiedDeveloperValue[index] = e.target.value;
-//                   setDeveloperValue(copiedDeveloperValue);
-//                 }}
-//               />
-//             ))}
-//           </label>
-//           <button onClick={() => setDeveloperValue([...developerValue, ""])}>
-//             Add developer
-//           </button>
-//           <br />
-
-//           <label>
-//             Scrum Master Name:
-//             <input
-//               type="text"
-//               name="scrumMasterName"
-//               value={scrumMasterNameValue}
-//               onChange={(e) => setScrumMasterNameValue(e.target.value)}
-//             />
-//           </label>
-//           <br />
-
-//           <label>
-//             Start Date:
-//             <input
-//               type="text"
-//               name="startDate"
-//               value={startDateValue}
-//               onChange={(e) => setStartDateValue(e.target.value)}
-//             />
-//           </label>
-//           <br />
-
-//           <label>
-//             Methodology:
-//             <input
-//               type="text"
-//               name="methodology"
-//               value={methodologyValue}
-//               onChange={(e) => setMethodologyValue(e.target.value)}
-//             />
-//           </label>
-//           <br />
-
-//           <button type="submit" onClick={handleSubmit}>
-//             {submitType === "add" ? "Add" : "Save"}
-//           </button>
-//         </form>
-//       </Modal.Body>
-//       <Modal.Footer>
-//         <button onClick={closeForm}>Cancel</button>
-//       </Modal.Footer>
-//     </Modal>
-//   );
-// };
 
 export default ProductForm;
